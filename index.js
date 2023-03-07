@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const logoShape = require("./shapes.js");
+const logoShape = require("./lib/shapes")
 
 //a function to write an SVG
 function writeToFile(fileName, data) {
@@ -31,7 +31,7 @@ const questions = [
 
 function init() {
     inquirer.prompt(questions).then((data) => {
-      const template = logoShape(data);
+      const template = generateLogo(data);
       console.log("Generating Logo");
       fs.writeFileSync("SVG", template);
     });
