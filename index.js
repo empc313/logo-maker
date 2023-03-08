@@ -1,8 +1,8 @@
 //Required 
 const inquirer = require("inquirer");
 const fs = require("fs");
-const {generateSVG} = require("./lib/svg");
-const {renderShape} = require('./lib/shapes');
+const Svg = require("./lib/svg");
+const shapes = require('./lib/shapes');
 
 //Questions for user data
 inquirer
@@ -16,7 +16,7 @@ inquirer
     //Question for text color
     {
         type: "input",
-        name:"text-color",
+        name:"textColor",
         message: "Enter text color"
     },
     //Question for logo shape
@@ -33,12 +33,24 @@ inquirer
         message: "Choose a color for your logo.",
     },
 ])
-
 //generate SVG file pulling from user data
-.then((data) => {
- const template = generateSVG(shape);
+//.then((answers) => fs.writeFile("logo.svg", generateSvg(answers)), {})
+.then((answers) => {
+console.log(answers.shape)
+const shape = new shapes[answers.shape](answers.color, answers.text, answers.textColor)
+ const template = generateSvg(shape);
  console.log("Generating Logo");
- fs.writeFileSync("genrateSVG", template);
+ fs.writeFileSync("logo.svg", template);
     });
+
+
+const generateSvg = (shape) => {
+    console.log(Svg)
+    const logo = new Svg()
+    logo.setShape(shape)
+    logo.setText(shape.text, shape.textColor)
+    return logo.render();
+}
+// console.log(generateSvg)
 
 

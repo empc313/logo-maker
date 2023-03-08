@@ -1,0 +1,4 @@
+<svg width="200" height="300">
+        <polygon points="100 0, 0 ,0 50, 100" fill="red"/>
+        <text x="50" y="45" font-size="45" text-anchor="middle" fill="white">EPC</text>
+        </svg>
